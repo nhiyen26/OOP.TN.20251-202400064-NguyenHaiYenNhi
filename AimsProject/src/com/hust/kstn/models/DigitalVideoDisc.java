@@ -1,14 +1,15 @@
 package com.hust.kstn.models;
 
 public class DigitalVideoDisc {
-    private String id;
+    private static int nbDigitalVideoDiscs = 0;
+    private int id;
     private String title;
     private String category;
     private String director;
     private int length;
     private double cost;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -32,26 +33,32 @@ public class DigitalVideoDisc {
         return cost;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public DigitalVideoDisc() {
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public DigitalVideoDisc(String title) {
+        super();
         this.title = title;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
     public DigitalVideoDisc(String category, String title, double cost) {
-        this.category = category;
         this.title = title;
+        this.category = category;
         this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
     public DigitalVideoDisc(String director, String category, String title, double cost) {
-        this(category, title, cost); // Gọi constructor 3 để gán giá trị chung
         this.director = director;
+        this.category = category;
+        this.title = title;
+        this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
     public DigitalVideoDisc(String title, String category, String director, int length, double cost) {
@@ -60,15 +67,12 @@ public class DigitalVideoDisc {
         this.director = director;
         this.length = length;
         this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
 
-    public void playDemo() {
-        if (this.length > 0) {
-            System.out.println("Playing DVD: " + this.title);
-            System.out.println("DVD Length: " + this.length + " minutes.");
-        } else {
-            System.out.println("ERROR: The DVD " + this.title + " cannot be played.");
-        }
+    @Override
+    public String toString() {
+        return "DVD[" + id + "] - " + title + " - " + String.format("%.2f", cost) + " $ - " + length + " - " + category + " - " + director;
     }
-
 }

@@ -1,23 +1,18 @@
 package com.hust.kstn.models;
 
 public class Cart {
-    private static final int MAX_NUMBER_ORDERED = 20;
+    public static final int MAX_NUMBER_ORDERED = 20;
     private DigitalVideoDisc[] itemsInCart = new DigitalVideoDisc[MAX_NUMBER_ORDERED];
     private int qtyOrdered = 0;
 
-    public void addDVD(DigitalVideoDisc disc) {
+    public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered < MAX_NUMBER_ORDERED) {
             itemsInCart[qtyOrdered] = disc;
             qtyOrdered++;
-            System.out.println("The disc '" + disc.getTitle() + "' has been added successfully.");
+            System.out.println("The disc has been added.");
         } else {
-            System.out.println("The cart is almost full. Cannot add disc: " + disc.getTitle());
+            System.out.println("The cart is almost full.");
         }
-    }
-
-    public void addDVD(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        addDVD(dvd1);
-        addDVD(dvd2);
     }
 
     public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
@@ -31,89 +26,80 @@ public class Cart {
         }
     }
 
-    public void removeDVD(DigitalVideoDisc disc) {
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+    }
+
+    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered == 0) {
-            System.out.println("The cart is empty. Cannot remove DVD.");
+            System.out.println("The cart is empty.");
             return;
         }
         for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsInCart[i] != null && itemsInCart[i].equals(disc)) {
+            if (itemsInCart[i].equals(disc)) {
                 for (int j = i; j < qtyOrdered - 1; j++) {
                     itemsInCart[j] = itemsInCart[j + 1];
                 }
                 itemsInCart[qtyOrdered - 1] = null;
                 qtyOrdered--;
-                System.out.println("The disc '" + disc.getTitle() + "' has been removed successfully.");
+                System.out.println("The disc has been removed.");
                 return;
             }
         }
-        System.out.println("The disc '" + disc.getTitle() + "' does not exist in the cart.");
+        System.out.println("The disc does not exist in the cart.");
     }
 
-    public double calculateTotalCost() {
-        double totalCost = 0.0;
+    public float calculateTotalCost() {
+        float total = 0;
         for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsInCart[i] != null) {
-                totalCost += itemsInCart[i].getCost();
-            }
+            total += itemsInCart[i].getCost();
         }
-        System.out.println("Total cost of the items in cart: " + String.format("%.2f", totalCost));
-        return totalCost;
+        return total;
     }
 
     public void print() {
-        System.out.println("=== Total item in cart: " + qtyOrdered + " ===");
+        System.out.println("================THE CURRENT CART================");
+        System.out.println("Total items: " + qtyOrdered); 
+        System.out.println("Ordered Items:");
         if (qtyOrdered == 0) {
             System.out.println("The cart is empty.");
         } else {
             for (int i = 0; i < qtyOrdered; i++) {
-                DigitalVideoDisc item = itemsInCart[i];
-                System.out.println((i + 1) + ". [ID: " + item.getId() + "] Title: " + item.getTitle() + " - Cost: "
-                        + String.format("%.2f", item.getCost()));
+                System.out.println((i + 1) + ". " + itemsInCart[i].toString());
             }
         }
-        calculateTotalCost();
+        System.out.println("Subtotal: " + String.format("%.2f", calculateTotalCost()) + "$");
+        System.out.println("================================================"); 
     }
-
-    public DigitalVideoDisc search(String id) {
+        
+    public void search(int id) {
+        boolean found = false;
         for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsInCart[i] != null && itemsInCart[i].getId() != null && itemsInCart[i].getId().equals(id)) {
-                System.out.println("\nSearch result (by ID):");
-                System.out.println("[ID: " + itemsInCart[i].getId() + "] Title: " + itemsInCart[i].getTitle()
-                        + " - Cost: " + String.format("%.2f", itemsInCart[i].getCost()));
-                return itemsInCart[i];
+            if (itemsInCart[i].getId() == id) {
+                System.out.println("Found matching ID: " + itemsInCart[i].toString());
+                found = true;
+                break;
             }
         }
-        System.out.println("Product with ID " + id + " not found in the cart.");
-        return null;
+        if (!found) {
+            System.out.println("No match found for ID: " + id);
+        }
     }
 
-    public DigitalVideoDisc search(String title) {
+    public void search(String title) {
+        boolean found = false;
         for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsInCart[i] != null && itemsInCart[i].getTitle() != null
-                    && itemsInCart[i].getTitle().equalsIgnoreCase(title)) {
-                System.out.println("\nSearch result (by Title):");
-                System.out.println("[ID: " + itemsInCart[i].getId() + "] Title: " + itemsInCart[i].getTitle()
-                        + " - Cost: " + String.format("%.2f", itemsInCart[i].getCost()));
-                return itemsInCart[i];
+            if (itemsInCart[i].getTitle().equalsIgnoreCase(title)) {
+                System.out.println("Found matching Title: " + itemsInCart[i].toString());
+                found = true;
+                break;
             }
         }
-        System.out.println("Product with title '" + title + "' not found in the cart.");
-        return null;
-    }
-
-    public DigitalVideoDisc search(String title) {
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsInCart[i] != null && itemsInCart[i].getTitle() != null
-                    && itemsInCart[i].getTitle().equalsIgnoreCase(title)) {
-                System.out.println("\nSearch result (by Title):");
-                System.out.println("[ID: " + itemsInCart[i].getId() + "] Title: " + itemsInCart[i].getTitle()
-                        + " - Cost: " + String.format("%.2f", itemsInCart[i].getCost()));
-                return itemsInCart[i];
-            }
+        if (!found) {
+            System.out.println("No match found for Title: " + title);
         }
-        System.out.println("Product with title '" + title + "' not found in the cart.");
-        return null;
     }
-
 }
+
+

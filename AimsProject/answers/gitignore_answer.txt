@@ -1,5 +1,5 @@
 1.
-- Vì:
+- Thêm các đường dẫn vào .gitinore vì:
   + .settings, .classpath, .project: Là các file cấu hình môi trường riêng biệt của Eclipse trên từng máy.
   + bin/: Chứa file mã máy (.class) sinh ra tự động khi biên dịch, không phải source code
 - Nếu không thêm:
