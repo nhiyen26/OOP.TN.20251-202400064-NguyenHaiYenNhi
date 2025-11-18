@@ -24,17 +24,17 @@ public class Aims {
          * cart.addDVD(dvd3);
          */
 
-        cart.addDVD(dvd1, dvd2);
-        cart.addDVD(dvd3);
+        cart.addDigitalVideoDisc(dvd1, dvd2);
+        cart.addDigitalVideoDisc(dvd3);
 
         cart.print();
 
-        cart.removeDVD(dvd2); // remove dvd
+        cart.removeDigitalVideoDisc(dvd2); // remove dvd
         cart.calculateTotalCost(); // calculate cost
         cart.print();
 
-        cart.removeDVD(dvd4);
-        cart.addDVD(dvd4);
+        cart.removeDigitalVideoDisc(dvd4);
+        cart.addDigitalVideoDisc(dvd4);
 
         cart.search("DVD001"); // search by ID
         cart.search("The Lion King"); // search by title
