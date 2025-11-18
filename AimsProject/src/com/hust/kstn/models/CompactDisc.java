@@ -3,27 +3,24 @@ package com.hust.kstn.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompactDisc {
-    private int id; 
-    private String title;
-    private String category;
-    private double cost;
-    
+public class CompactDisc extends Disc {
     private String artist;
-    private String director; 
     private List<Track> tracks = new ArrayList<>();
-    
-    public CompactDisc(int id, String title, String category, double cost, 
-                       String artist, String director, List<Track> tracks) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
+
+    public CompactDisc(String title, String category, double cost, 
+                       String director, int length, String artist, List<Track> tracks) {
+        super(title, category, cost, director, length); 
         this.artist = artist;
-        this.director = director;
         this.tracks = tracks;
     }
-    
+
+    public String getArtist() {
+        return artist;
+    }
+    public List<Track> getTracks() {
+        return tracks;
+    }
+
     public int totalLength() {
         int total = 0;
         for (Track track : tracks) {
@@ -34,15 +31,15 @@ public class CompactDisc {
     
     public void play() {
         if (totalLength() <= 0) {
-            System.out.println("ERROR: Cannot play CD '" + this.title + "'. Total length is 0 or less.");
+            System.out.println("ERROR: Cannot play CD '" + this.getTitle() + "'. Total length is 0 or less.");
             return;
         }
         
-        System.out.println("Playing CD: " + this.title);
+        System.out.println("Playing CD: " + this.getTitle());
         System.out.println("Total CD length: " + totalLength() + " minutes.");
         
         for (Track track : tracks) {
-            track.play(); 
+            track.play();
         }
     }
     
@@ -65,6 +62,6 @@ public class CompactDisc {
     
     @Override
     public String toString() {
-        return "CD [" + id + "][" + title + "][" + artist + "][" + totalLength() + " mins]";
+        return "CD - " + super.toString() + " [Artist: " + artist + "]";
     }
 }

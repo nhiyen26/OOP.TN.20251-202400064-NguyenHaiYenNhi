@@ -11,7 +11,7 @@ public class BookTest {
         authorList.add(new BookAuthor("Nguyen Van A", 1980, "Viet tieu su"));
         authorList.add(new BookAuthor("Tran Thi B", 1995, "Viet truyen ngan"));
 
-        Book book = new Book(1, "Lap Trinh Huong Doi Tuong", "Giao trinh", 
+        Book book = new Book( "Lap Trinh Huong Doi Tuong", "Giao trinh", 
                              25.50, 50000, authorList);
 
         System.out.println(book.toString());

@@ -12,8 +12,8 @@ public class CompactDiscTest {
         trackList.add(new Track("Track B - Main Song", 15));
         trackList.add(new Track("Track C - Zero Length", 0)); 
         
-        CompactDisc cd = new CompactDisc(2, "The Best Of OOP", "Education", 
-                                         49.99, "AI Assistant", "Dr. Trang", trackList);
+        CompactDisc cd = new CompactDisc("The Best Of OOP", "Education", 49.99, 
+                                 "Dr. Trang", 20, "AI Assistant", trackList);
         
         System.out.println("Total length of CD: " + cd.totalLength() + " minutes.");
         

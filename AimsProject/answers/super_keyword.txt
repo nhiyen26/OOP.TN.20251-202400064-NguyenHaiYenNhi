@@ -1,0 +1,4 @@
+-super được sử dụng để gọi trực tiếp hàm khởi tạo (constructor) của lớp cha liền kề (Media trong ví dụ của Book)
+-Mục đích là để khởi tạo các thuộc tính chung đã được di chuyển lên lớp cha (title, cost, category) mà không cần viết lại code trong lớp con
+-Tại sao Java chỉ hỗ trợ đơn kế thừa?
+ nếu lớp con kế thừa hai phương thức cùng tên từ hai lớp cha khác nhau=> chương trình không biết chọn thực thi phương thức nào.

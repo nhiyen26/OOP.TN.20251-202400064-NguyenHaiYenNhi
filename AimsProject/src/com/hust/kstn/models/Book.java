@@ -3,28 +3,28 @@ package com.hust.kstn.models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book {
-    private int id; 
-    private String title;
-    private String category;
-    private double cost;
-    
+public class Book extends Media { 
     private int numOfTokens; 
     private List<BookAuthor> authors = new ArrayList<>(); 
 
-    public Book(int id, String title, String category, double cost, 
+    public Book(String title, String category, double cost, 
                 int numOfTokens, List<BookAuthor> authors) {
-        this.id = id;
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
+        // Gọi hàm khởi tạo của lớp cha (Media)
+        super(title, category, cost); 
         this.numOfTokens = numOfTokens;
         this.authors = authors;
     }
 
+    public int getNumOfTokens() {
+        return numOfTokens;
+    }
+    public List<BookAuthor> getAuthors() {
+        return authors;
+    }
+
     @Override
     public String toString() {
-        return "Book [" + id + "][" + title + "][" + cost + "][" + category + "][" 
-               + numOfTokens + "]\nAuthors: " + authors;
+        return super.toString() + " [" + numOfTokens + " tokens]" 
+               + "\nAuthors: " + authors;
     }
 }

@@ -1,78 +1,43 @@
 package com.hust.kstn.models;
 
-public class DigitalVideoDisc {
-    private static int nbDigitalVideoDiscs = 0;
-    private int id;
-    private String title;
-    private String category;
-    private String director;
-    private int length;
-    private double cost;
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public double getCost() {
-        return cost;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public DigitalVideoDisc(String title) {
-        super();
-        this.title = title;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    public DigitalVideoDisc(String category, String title, double cost) {
-        this.title = title;
-        this.category = category;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    public DigitalVideoDisc(String director, String category, String title, double cost) {
-        this.director = director;
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
+public class DigitalVideoDisc extends Disc { 
+    
     public DigitalVideoDisc(String title, String category, String director, int length, double cost) {
-        this.title = title;
-        this.category = category;
-        this.director = director;
-        this.length = length;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+        super(title, category, cost, director, length); 
+    }
+    
+    public DigitalVideoDisc(String title) {
+        super(title, "Unknown Category", 0.0, "Unknown Director", 0);
+    }
+    
+    public DigitalVideoDisc(String category, String title, double cost) {
+        super(title, category, cost, "Unknown Director", 0);
+    }
+    
+    public DigitalVideoDisc(String director, String category, String title, double cost) {
+        super(title, category, cost, director, 0);
+    }
+    
+    public void play() {
+        if (this.getLength() > 0) {
+            System.out.println("Playing DVD: " + this.getTitle());
+            System.out.println("DVD length: " + this.getLength() + " minutes.");
+        } else {
+            System.out.println("ERROR: Cannot play DVD '" + this.getTitle() + "'. Length is 0 or less.");
+        }
     }
 
     @Override
     public String toString() {
-        return "DVD[" + id + "] - " + title + " - " + String.format("%.2f", cost) + " $ - " + length + " - " + category + " - " + director;
+        return "DVD - " + super.toString(); 
+    }
+   
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof DigitalVideoDisc)) return false;
+        DigitalVideoDisc other = (DigitalVideoDisc) obj;
+        return this.getTitle().equals(other.getTitle()) &&
+               this.getCategory().equals(other.getCategory()) &&
+               this.getCost() == other.getCost();
     }
 }
