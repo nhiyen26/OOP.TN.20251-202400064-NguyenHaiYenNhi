@@ -26,3 +26,5 @@ replay_pid*
 bin
 .classpath
 .project
+.DS_Store
+.vscode/
