@@ -1,0 +1,3 @@
+-Chuyện gì xảy ra khi thêm phương thức addDVD(DigitalVideoDisc ...discs)?:
+Compiler báo lỗi "Duplicate method" vì trong Java, Varargs kiểu "Type..."  dc xử lý như một mảng "Type[]"=> 2 method có cùng signature nên lỗi
+-Giải pháp của em: chọn chỉ dùng 1 trong 2 method hoặc đổi tên 1 trong 2 method 

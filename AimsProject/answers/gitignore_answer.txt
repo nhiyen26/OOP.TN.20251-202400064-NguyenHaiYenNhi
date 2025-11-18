@@ -1,0 +1,13 @@
+1.
+- Vì:
+  + .settings, .classpath, .project: Là các file cấu hình môi trường riêng biệt của Eclipse trên từng máy.
+  + bin/: Chứa file mã máy (.class) sinh ra tự động khi biên dịch, không phải source code
+- Nếu không thêm:
+  + Người khác tải về sẽ bị lỗi do khác biệt cấu hình môi trường (JDK, đường dẫn...)
+  + Rác Repository: Làm nặng kho chứa với các file thừa thãi không cần thiết
+2. Em dùng VSCode thì cần thêm .vscode/
+3.
+-xoá file khỏi vùng theo dõi của git: git rm -r --cached <tên_file_hoặc_thư_mục>
+-update file .gitignore: git add .gitignore
+-commit các thay đổi: git commit -m "update .gitignore and remove cached files"
+
